@@ -12,13 +12,12 @@ import Message from "./models/Message.js";
 import { authMiddleware } from "./middleware/auth.js";
 import User from "./models/User.js";
 
+mongoose.connect(process.env.MONGODB_URI);
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-mongoose.connect(process.env.MONGODB_URI);
 
 const server = createServer(app);
 const io = new Server(server, {
@@ -89,9 +88,9 @@ app.get("/api/messages", authMiddleware, async (req, res) => {
   }
 });
 
-app.get('/', (req, res) => {
-  res.send('Welcome To The Server!');
-})
+app.get("/", (req, res) => {
+  res.send("Welcome To The Server!");
+});
 
 // Socket.IO middleware for authentication
 io.use((socket, next) => {
