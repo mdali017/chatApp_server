@@ -11,8 +11,9 @@ import dotenv from "dotenv";
 import Message from "./models/Message.js";
 import { authMiddleware } from "./middleware/auth.js";
 import User from "./models/User.js";
+import connectDatabase from "./config/db_connect.js";
 
-mongoose.connect(process.env.MONGODB_URI);
+connectDatabase();
 dotenv.config();
 
 const app = express();
